@@ -1,0 +1,16 @@
+{
+  "class_to_idx": {
+    "iron_deficiency_anemia": 0,
+    "vitamin_a_deficiency": 1,
+    "vitamin_b_complex_deficiency": 2,
+    "vitamin_c_deficiency": 3,
+    "vitamin_d_deficiency": 4
+  },
+  "idx_to_class": {
+    "0": "iron_deficiency_anemia",
+    "1": "vitamin_a_deficiency",
+    "2": "vitamin_b_complex_deficiency",
+    "3": "vitamin_c_deficiency",
+    "4": "vitamin_d_deficiency"
+  }
+}

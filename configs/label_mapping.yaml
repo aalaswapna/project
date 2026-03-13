@@ -1,0 +1,68 @@
+﻿unified_classes:
+  iron_deficiency_anemia:
+    patterns:
+      - iron
+      - anemia
+      - anaemia
+      - ferritin
+      - hemoglobin
+      - haemoglobin
+      - hb
+  vitamin_a_deficiency:
+    patterns:
+      - vitamin a
+      - vit a
+      - vda
+      - retinal-a
+      - xerophthalmia
+      - night blindness
+  vitamin_b_complex_deficiency:
+    patterns:
+      - vitamin b
+      - vit b
+      - b12
+      - b2
+      - b6
+      - b9
+      - folate
+      - folic
+      - niacin
+      - riboflavin
+      - thiamine
+  vitamin_c_deficiency:
+    patterns:
+      - vitamin c
+      - vit c
+      - scurvy
+      - ascorbic
+  vitamin_d_deficiency:
+    patterns:
+      - vitamin d
+      - vit d
+      - rickets
+      - osteomalacia
+  other_deficiency:
+    patterns:
+      - zinc
+      - iodine
+      - calcium
+      - magnesium
+      - protein
+      - micronutrient
+
+organ_keywords:
+  eye:
+    - eye
+    - retinal
+    - retina
+    - ocular
+    - conjunctiva
+  nail:
+    - nail
+    - onych
+    - koilonychia
+  skin:
+    - skin
+    - derma
+    - cutaneous
+    - dermatitis

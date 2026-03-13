@@ -1,0 +1,23 @@
+dataset,original_label,unified_label
+pangasainarendra/vitamin-deficiency,dataset allergic contact dermatitis,vitamin_d_deficiency
+pangasainarendra/vitamin-deficiency,dataset candidiasis,vitamin_d_deficiency
+pangasainarendra/vitamin-deficiency,dataset candidiasis large skin folds,vitamin_d_deficiency
+pangasainarendra/vitamin-deficiency,dataset chondrodermatitis nodularis,vitamin_d_deficiency
+pangasainarendra/vitamin-deficiency,dataset dermographism,vitamin_d_deficiency
+pangasainarendra/vitamin-deficiency,dataset epidermal nevus,vitamin_d_deficiency
+pangasainarendra/vitamin-deficiency,dataset flaky skin,vitamin_d_deficiency
+pangasainarendra/vitamin-deficiency,dataset pyoderma gangrenosum,vitamin_d_deficiency
+pangasainarendra/vitamin-deficiency,dataset rhus dermatitis,vitamin_d_deficiency
+udaykarthik21bce9252/vitamin-defficiency-dataset,dataset vitamin a deficiency,vitamin_a_deficiency
+udaykarthik21bce9252/vitamin-defficiency-dataset,dataset vitamin b 12 deficiency,vitamin_b_complex_deficiency
+udaykarthik21bce9252/vitamin-defficiency-dataset,dataset vitamin b complex deficiency,vitamin_b_complex_deficiency
+udaykarthik21bce9252/vitamin-defficiency-dataset,dataset vitamin d deficiency,vitamin_d_deficiency
+udaykarthik21bce9252/vitamin-defficiency-dataset,dataset vitamin e deficiency,vitamin_d_deficiency
+udaykarthik21bce9252/vitamin-defficiency-dataset,"dataset zinc, iron, biotin, or protein deficiency",iron_deficiency_anemia
+ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset,dataset retina blood vessel,vitamin_d_deficiency
+ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset,dataset retina blood vessel mask,vitamin_d_deficiency
+ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset,dataset vitamin a,vitamin_a_deficiency
+ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset,dataset vitamin b,vitamin_b_complex_deficiency
+ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset,dataset vitamin c,vitamin_c_deficiency
+ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset,dataset vitamin d,vitamin_d_deficiency
+ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset,dataset vitamin e,vitamin_d_deficiency

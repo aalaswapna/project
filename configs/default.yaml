@@ -1,0 +1,226 @@
+﻿project:
+  name: ai-vitamin-deficiency-detection
+  random_seed: 42
+
+paths:
+  raw_data_dir: data/raw
+  processed_data_dir: data/processed
+  models_dir: models
+  evaluation_dir: evaluation
+  logs_dir: logs
+  dataset_reports_dir: logs/dataset_reports
+
+datasets:
+  image_datasets:
+    - csepython/vitamin-deficiency-image-dataset
+    - ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset
+    - udaykarthik21bce9252/vitamin-defficiency-dataset
+    - ruckdent/vitamin-deficiency-dataset-india
+    - pangasainarendra/vitamin-deficiency
+  nutrition_datasets:
+    - gokulprasantht/nutrition-dataset
+    - mexwell/food-vitamins-minerals-macronutrient
+    - tharunmss/nutritional-breakdown-of-foods
+  min_usable_images: 200
+  recommended_usable_images: 500
+  supported_image_ext:
+    - .jpg
+    - .jpeg
+    - .png
+    - .bmp
+    - .tif
+    - .tiff
+    - .webp
+  unrelated_keywords:
+    - cancer
+    - pneumonia
+    - covid
+    - tuberculosis
+    - brain
+    - tumor
+    - fracture
+    - melanoma
+    - alzheimer
+    - parkinson
+    - cataract-only
+    - diabetic-retinopathy-only
+    - xray
+
+preprocessing:
+  image_size: 224
+  split:
+    train: 0.70
+    val: 0.15
+    test: 0.15
+  normalize:
+    efficientnet_b0:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+    resnet50:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+    convnext_tiny:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+    vit_b_16:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+questionnaire:
+  fields:
+    - fatigue
+    - diet_type
+    - vegetarian
+    - pregnancy
+    - sunlight_exposure
+    - medications
+    - chronic_illness
+    - allergies
+    - lactose_intolerance
+  diet_type_map:
+    omnivore: 0
+    vegetarian: 1
+    vegan: 2
+  synthetic_profiles:
+    iron_deficiency_anemia:
+      fatigue_prob: 0.85
+      vegetarian_prob: 0.30
+      pregnancy_prob: 0.22
+      sunlight_mean: 2.5
+      medication_lambda: 1.2
+      chronic_prob: 0.42
+      allergy_prob: 0.19
+      lactose_prob: 0.21
+      diet_weights: [0.60, 0.25, 0.15]
+    vitamin_a_deficiency:
+      fatigue_prob: 0.50
+      vegetarian_prob: 0.33
+      pregnancy_prob: 0.16
+      sunlight_mean: 2.2
+      medication_lambda: 1.0
+      chronic_prob: 0.24
+      allergy_prob: 0.12
+      lactose_prob: 0.17
+      diet_weights: [0.58, 0.27, 0.15]
+    vitamin_b_complex_deficiency:
+      fatigue_prob: 0.74
+      vegetarian_prob: 0.44
+      pregnancy_prob: 0.18
+      sunlight_mean: 2.3
+      medication_lambda: 1.5
+      chronic_prob: 0.30
+      allergy_prob: 0.18
+      lactose_prob: 0.20
+      diet_weights: [0.48, 0.33, 0.19]
+    vitamin_c_deficiency:
+      fatigue_prob: 0.58
+      vegetarian_prob: 0.22
+      pregnancy_prob: 0.14
+      sunlight_mean: 2.4
+      medication_lambda: 1.1
+      chronic_prob: 0.20
+      allergy_prob: 0.17
+      lactose_prob: 0.16
+      diet_weights: [0.69, 0.20, 0.11]
+    vitamin_d_deficiency:
+      fatigue_prob: 0.64
+      vegetarian_prob: 0.37
+      pregnancy_prob: 0.19
+      sunlight_mean: 1.1
+      medication_lambda: 1.4
+      chronic_prob: 0.34
+      allergy_prob: 0.14
+      lactose_prob: 0.27
+      diet_weights: [0.54, 0.29, 0.17]
+    other_deficiency:
+      fatigue_prob: 0.45
+      vegetarian_prob: 0.25
+      pregnancy_prob: 0.13
+      sunlight_mean: 2.0
+      medication_lambda: 0.9
+      chronic_prob: 0.22
+      allergy_prob: 0.15
+      lactose_prob: 0.18
+      diet_weights: [0.62, 0.24, 0.14]
+
+training:
+  backbone: efficientnet_b0
+  freeze_ratio: 0.70
+  unfreeze_epoch: 6
+  batch_size: 32
+  num_workers: 4
+  max_epochs: 40
+  min_epochs: 10
+  early_stopping_patience: 8
+  optimizer:
+    name: adamw
+    lr: 0.0002
+    weight_decay: 0.0001
+  scheduler:
+    name: cosine
+    min_lr: 0.000001
+  loss: cross_entropy
+  class_balance_mode: weighted_sampler
+  amp: true
+  grad_clip_norm: 1.0
+
+recommendation:
+  deficiency_to_nutrients:
+    iron_deficiency_anemia:
+      iron_mg: 0.55
+      vitamin_c_mg: 0.20
+      folate_ug: 0.15
+      protein_g: 0.10
+    vitamin_a_deficiency:
+      vitamin_a_ug: 0.60
+      zinc_mg: 0.20
+      fat_g: 0.20
+    vitamin_b_complex_deficiency:
+      vitamin_b12_ug: 0.40
+      folate_ug: 0.25
+      vitamin_b6_mg: 0.20
+      protein_g: 0.15
+    vitamin_c_deficiency:
+      vitamin_c_mg: 0.70
+      iron_mg: 0.15
+      fiber_g: 0.15
+    vitamin_d_deficiency:
+      vitamin_d_iu: 0.70
+      calcium_mg: 0.20
+      magnesium_mg: 0.10
+    other_deficiency:
+      protein_g: 0.40
+      zinc_mg: 0.20
+      calcium_mg: 0.20
+      magnesium_mg: 0.20
+  scoring_weights:
+    nutrient_density: 0.45
+    absorption_rate: 0.20
+    bioavailability: 0.20
+    portion_size_adjustment: 0.10
+    user_constraints: 0.05
+  severity_threshold: 0.72
+  upper_limits:
+    iron_mg: 45
+    vitamin_a_ug: 3000
+    vitamin_b12_ug: 2000
+    vitamin_c_mg: 2000
+    vitamin_d_iu: 4000
+
+mongo:
+  uri: mongodb://localhost:27017
+  database: vitamin_ai
+  collections:
+    sessions: sessions
+    predictions: predictions
+    nutrition: nutrition
+    logs: logs
+    users: users
+
+backend:
+  host: 127.0.0.1
+  port: 8000
+
+frontend:
+  host: 127.0.0.1
+  port: 5173

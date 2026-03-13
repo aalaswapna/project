@@ -1,0 +1,43 @@
+{
+  "total_images": 2525,
+  "split_sizes": {
+    "train": 1767,
+    "val": 379,
+    "test": 379
+  },
+  "class_distribution": {
+    "train": {
+      "vitamin_d_deficiency": 930,
+      "vitamin_a_deficiency": 451,
+      "vitamin_b_complex_deficiency": 294,
+      "vitamin_c_deficiency": 74,
+      "iron_deficiency_anemia": 18
+    },
+    "val": {
+      "vitamin_d_deficiency": 200,
+      "vitamin_a_deficiency": 97,
+      "vitamin_b_complex_deficiency": 63,
+      "vitamin_c_deficiency": 15,
+      "iron_deficiency_anemia": 4
+    },
+    "test": {
+      "vitamin_d_deficiency": 199,
+      "vitamin_a_deficiency": 97,
+      "vitamin_b_complex_deficiency": 63,
+      "vitamin_c_deficiency": 16,
+      "iron_deficiency_anemia": 4
+    }
+  },
+  "skipped_breakdown": {
+    "duplicates": 4602,
+    "organ_unknown": 37819,
+    "forbidden_oral": 4
+  },
+  "dataset_label_hits": {
+    "ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset": 598,
+    "udaykarthik21bce9252/vitamin-defficiency-dataset": 1455,
+    "pangasainarendra/vitamin-deficiency": 472
+  },
+  "unsuitable_datasets": [],
+  "synthetic_questionnaires": 2525
+}

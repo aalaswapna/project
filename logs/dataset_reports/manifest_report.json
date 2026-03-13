@@ -1,0 +1,119 @@
+{
+  "image": [
+    {
+      "dataset": "csepython/vitamin-deficiency-image-dataset",
+      "dataset_kind": "image",
+      "passed": false,
+      "file_count": 20,
+      "image_count": 20,
+      "csv_count": 0,
+      "reasons": [
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-6-57-04-PM_png.rf.0a7413c94c851b7c0414d584d2093fbd.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-6-59-00-PM_png.rf.52d2c165b3c7ef85c25c239cb2146225.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-05-28-PM_png.rf.5d32da49a3bc283986dab1954dcceb5f.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-06-04-PM_png.rf.67247e38aae085b1b31149dd33d193d4.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-06-18-PM_png.rf.4c0e8a31e53cae20fc379588090f05fb.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-07-09-PM_png.rf.3a4cb891486f622b814420b46c5b7afa.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-08-07-PM_png.rf.13c398899ecb5999ec1255d1a65e968d.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-08-33-PM_png.rf.4dc8519114ba39eb543c9c1748dcd151.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-09-31-PM_png.rf.34122f5f196fe8741fc06f39409ba15f.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-10-48-PM_png.rf.4a19e21892dd4439f0f7464024108735.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-12-30-PM_png.rf.3a6864e907f69d6861f991ee27a567e5.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-13-37-PM_png.rf.212c59fc0f5e7f72553fadeaa09367d5.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-16-at-7-16-08-PM_png.rf.5a287f9eaa890a46bfda9d83007ba778.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-19-at-1-27-27-AM_png.rf.7e1f40b9546721c1381ecd40b277626c.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-19-at-1-38-07-AM_png.rf.4dd8be0c01a6940255cb865d1db07c01.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-19-at-1-41-12-AM_png.rf.9467bb574e5dc873704d3d2caa841003.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-19-at-1-47-13-AM_png.rf.0c2f16f4186efbfd8034601d6d8b346a.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-19-at-1-49-41-AM_png.rf.60f06bccdda2087c894477fdd3b4c652.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-19-at-1-50-04-AM_png.rf.5b2f224376897129b3ea1d2857252e2d.jpg",
+        "unrelated disease token in file path: new_train/Acral Lentiginous Melanoma/Screen-Shot-2021-11-19-at-1-50-14-AM_png.rf.1c45fc583a25c79882c31e3b622cd57d.jpg"
+      ],
+      "warnings": [
+        "manifest has weak organ-specific signal (will enforce at preprocessing)"
+      ]
+    },
+    {
+      "dataset": "ujjwalsinha01/vitamin-deficiency-and-retinal-analysis-image-dataset",
+      "dataset_kind": "image",
+      "passed": true,
+      "file_count": 20,
+      "image_count": 20,
+      "csv_count": 0,
+      "reasons": [],
+      "warnings": []
+    },
+    {
+      "dataset": "udaykarthik21bce9252/vitamin-defficiency-dataset",
+      "dataset_kind": "image",
+      "passed": true,
+      "file_count": 20,
+      "image_count": 20,
+      "csv_count": 0,
+      "reasons": [],
+      "warnings": [
+        "manifest has weak organ-specific signal (will enforce at preprocessing)"
+      ]
+    },
+    {
+      "dataset": "ruckdent/vitamin-deficiency-dataset-india",
+      "dataset_kind": "image",
+      "passed": false,
+      "file_count": 1,
+      "image_count": 0,
+      "csv_count": 1,
+      "reasons": [
+        "manifest has no image files"
+      ],
+      "warnings": [
+        "manifest has weak organ-specific signal (will enforce at preprocessing)"
+      ]
+    },
+    {
+      "dataset": "pangasainarendra/vitamin-deficiency",
+      "dataset_kind": "image",
+      "passed": true,
+      "file_count": 20,
+      "image_count": 20,
+      "csv_count": 0,
+      "reasons": [],
+      "warnings": [
+        "manifest has weak organ-specific signal (will enforce at preprocessing)"
+      ]
+    }
+  ],
+  "nutrition": [
+    {
+      "dataset": "gokulprasantht/nutrition-dataset",
+      "dataset_kind": "nutrition",
+      "passed": false,
+      "file_count": 1,
+      "image_count": 0,
+      "csv_count": 0,
+      "reasons": [
+        "manifest has no CSV files for nutrition ingestion"
+      ],
+      "warnings": []
+    },
+    {
+      "dataset": "mexwell/food-vitamins-minerals-macronutrient",
+      "dataset_kind": "nutrition",
+      "passed": true,
+      "file_count": 1,
+      "image_count": 0,
+      "csv_count": 1,
+      "reasons": [],
+      "warnings": []
+    },
+    {
+      "dataset": "tharunmss/nutritional-breakdown-of-foods",
+      "dataset_kind": "nutrition",
+      "passed": true,
+      "file_count": 1,
+      "image_count": 0,
+      "csv_count": 1,
+      "reasons": [],
+      "warnings": []
+    }
+  ]
+}
