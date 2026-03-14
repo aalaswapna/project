@@ -37,6 +37,27 @@ function AnalysisResult({ bundle, title }) {
   }
 
   const prediction = bundle.prediction || {}
+  // =========================================================================
+  // Fix - handling severity displays (14-03-2026)
+
+  const severity = prediction.severity || 0;
+  const threshold = prediction.severity_threshold || 0.72;
+
+  let statusLabel = "OK";
+  let statusClass = "status-ok"; // Green
+
+  if (severity >= threshold) {
+    statusLabel = "Severe";
+    statusClass = "status-alert"; // Red
+  } else if (severity >= threshold - 0.15) { 
+    // If severity is within 0.15 of the threshold, mark as Mild
+    statusLabel = "Mild";
+    statusClass = "status-warning"; // Yellow (we will add this class)
+  }
+
+  // Fix - ended here
+  // ===================================================================================
+  
   const result = bundle.result || {}
   const diet = bundle.diet || {}
   const probabilities = Object.entries(prediction.probabilities || {}).sort((a, b) => b[1] - a[1])
@@ -49,8 +70,16 @@ function AnalysisResult({ bundle, title }) {
       <article className="card">
         <div className="card-head">
           <h3>{title}</h3>
-          <span className={`status-pill ${prediction.severity_alert ? 'status-alert' : 'status-ok'}`}>
-            {prediction.severity_alert ? 'Alert triggered' : 'Within threshold'}
+          
+          {/* ================================================================================== */}
+          {/* Fix - handling severity displays (14-03-2026)  */}
+          <span className={`status-pill ${statusClass}`}>
+            {statusLabel}
+          {/* <span className={`status-pill ${prediction.severity_alert ? 'status-alert' : 'status-ok'}`}>
+            {prediction.severity_alert ? 'Alert triggered' : 'Within threshold'} */}
+            {/* Fix ended here */}
+            {/* ================================================================================ */}
+            
           </span>
         </div>
         <p className="muted">Updated: {new Date(bundle.createdAt).toLocaleString()}</p>
