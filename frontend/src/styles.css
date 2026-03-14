@@ -417,6 +417,17 @@ select:focus {
   align-items: center;
 }
 
+/* =============================================== */
+/* Fix - handling severity displays (14-03-2026) */
+
+.status-warning {
+  background-color: #ffcc00; /* Yellow */
+  color: #333;
+}
+
+/* Fix ended here */
+/* =============================================== */
+
 .status-pill {
   border-radius: 999px;
   padding: 6px 11px;
