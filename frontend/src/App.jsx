@@ -818,14 +818,20 @@ export default function App() {
             <label>
               Severity Alert Threshold <strong>{toPercent(severityThreshold)}</strong>
             </label>
-            <input
+            
+            {/* Fix - preventing user to manually adjust threshould */}
+            
+            {/* <input
               type="range"
               min="0.4"
               max="0.95"
               step="0.01"
               value={severityThreshold}
               onChange={(event) => setSeverityThreshold(Number(event.target.value))}
-            />
+            /> */}
+
+            {/* Fix end here */}
+            
           </div>
           <div className="account-box">
             <span>{username}</span>
