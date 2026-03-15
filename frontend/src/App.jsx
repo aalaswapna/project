@@ -302,7 +302,14 @@ export default function App() {
   const [tab, setTab] = useState('assessment')
   const [organ, setOrgan] = useState('skin')
   const [questionnaire, setQuestionnaire] = useState(initialQuestionnaire)
-  const [severityThreshold, setSeverityThreshold] = useState(0.72)
+  
+  // Fix - Fixed threshould manually changing by user issue
+  // const [severityThreshold, setSeverityThreshold] = useState(0.72)
+
+  const severityThreshold = 0.72;
+
+  // Fix end here
+  
 
   const [files, setFiles] = useState([])
   const [dragActive, setDragActive] = useState(false)
