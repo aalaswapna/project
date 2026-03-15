@@ -67,6 +67,22 @@ function AnalysisResult({ bundle, title }) {
 
   return (
     <div className="result-stack">
+
+      {/* =========================================================================================== */}
+      {/* Fix - Severity handling */}
+
+      {statusLabel === "Severe" && (
+        <div className="critical-alert-banner">
+          <div className="alert-content">
+            <h2>⚠️ CRITICAL SEVERITY DETECTED</h2>
+            <p>Your analysis indicates a high probability of severe vitamin deficiency. Please prioritize professional medical consultation immediately.</p>
+          </div>
+        </div>
+      )}
+
+      {/* Fix ends here */}
+      {/* =========================================================================================== */}
+      
       <article className="card">
         <div className="card-head">
           <h3>{title}</h3>
@@ -107,17 +123,20 @@ function AnalysisResult({ bundle, title }) {
         </div>
       </article>
 
-      <article className="card">
-        <h3>Probability Breakdown</h3>
-        <ul className="compact-list">
-          {probabilities.map(([label, value]) => (
-            <li key={label}>
-              <span>{label}</span>
-              <strong>{toPercent(value)}</strong>
-            </li>
-          ))}
-        </ul>
-      </article>
+      {/* 1. Only show breakdown/foods if NOT "OK" */}
+      {statusLabel !== "OK" ? (
+        <>
+        <article className="card">
+          <h3>Probability Breakdown</h3>
+          <ul className="compact-list">
+            {probabilities.map(([label, value]) => (
+              <li key={label}>
+                <span>{label}</span>
+                <strong>{toPercent(value)}</strong>
+              </li>
+            ))}
+          </ul>
+        </article>
 
       <article className="card">
         <h3>Top Recommended Foods</h3>
@@ -153,6 +172,19 @@ function AnalysisResult({ bundle, title }) {
           <p className={`advice ${diet.consult_specialist ? 'advice-alert' : 'advice-ok'}`}>{diet.medical_advice}</p>
         ) : null}
       </article>
+
+      {/* =============================================================================== */}
+      {/* Fix - Message shown if status is ok */}
+
+          /* Message shown when status is OK */
+          <article className="card status-ok-message">
+            <h3>Results: Healthy</h3>
+            <p>Your indicators are within normal ranges. No specific dietary changes are recommended at this time. Maintain your current healthy lifestyle!</p>
+          </article>
+        )}
+
+      {/* Fix ends here */}
+      {/* ==================================================================================== */}
 
       <article className="card heatmap-card">
         <h3>Grad-CAM Viewer</h3>
