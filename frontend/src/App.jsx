@@ -26,168 +26,363 @@ function toPercent(value) {
   return `${Math.round((value || 0) * 100)}%`
 }
 
+// function AnalysisResult({ bundle, title }) {
+//   if (!bundle) {
+//     return (
+//       <article className="card result-empty">
+//         <h3>{title}</h3>
+//         <p>Run an analysis to view prediction, severity alerts, food recommendations, and heatmaps.</p>
+//       </article>
+//     )
+//   }
+
+//   const prediction = bundle.prediction || {}
+//   // =========================================================================
+//   // Fix - handling severity displays (14-03-2026)
+
+//   const severity = prediction.severity || 0;
+//   const threshold = prediction.severity_threshold || 0.72;
+
+//   let statusLabel = "OK";
+//   let statusClass = "status-ok"; // Green
+
+//   if (severity >= threshold) {
+//     statusLabel = "Severe";
+//     statusClass = "status-alert"; // Red
+//   } else if (severity >= threshold - 0.15) { 
+//     // If severity is within 0.15 of the threshold, mark as Mild
+//     statusLabel = "Mild";
+//     statusClass = "status-warning"; // Yellow (we will add this class)
+//   }
+
+//   // Fix - ended here
+//   // ===================================================================================
+  
+//   const result = bundle.result || {}
+//   const diet = bundle.diet || {}
+//   const probabilities = Object.entries(prediction.probabilities || {}).sort((a, b) => b[1] - a[1])
+//   const rankedFoods = (diet.ranked_foods || []).slice(0, 10)
+//   const mealPlan = Object.entries(diet.meal_plan || {})
+//   const heatmaps = result.heatmaps || []
+
+//   return (
+//     <div className="result-stack">
+
+//       {/* =========================================================================================== */}
+//       {/* Fix - Severity handling */}
+
+//       {statusLabel === "Severe" && (
+//         <div className="critical-alert-banner">
+//           <div className="alert-content">
+//             <h2>⚠️ CRITICAL SEVERITY DETECTED</h2>
+//             <p>Your analysis indicates a high probability of severe vitamin deficiency. Please prioritize professional medical consultation immediately.</p>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Fix ends here */}
+//       {/* =========================================================================================== */}
+      
+//       <article className="card">
+//         <div className="card-head">
+//           <h3>{title}</h3>
+          
+//           {/* ================================================================================== */}
+//           {/* Fix - handling severity displays (14-03-2026)  */}
+//           <span className={`status-pill ${statusClass}`}>
+//             {statusLabel}
+//           {/* <span className={`status-pill ${prediction.severity_alert ? 'status-alert' : 'status-ok'}`}>
+//             {prediction.severity_alert ? 'Alert triggered' : 'Within threshold'} */}
+//             {/* Fix ended here */}
+//             {/* ================================================================================ */}
+            
+//           </span>
+//         </div>
+//         <p className="muted">Updated: {new Date(bundle.createdAt).toLocaleString()}</p>
+//         <div className="metrics-grid">
+//           <div className="metric-block">
+//             <label>Predicted class</label>
+//             <strong>{prediction.predicted_class || 'n/a'}</strong>
+//           </div>
+//           <div className="metric-block">
+//             <label>Confidence</label>
+//             <strong>{toPercent(prediction.confidence)}</strong>
+//           </div>
+//           <div className="metric-block">
+//             <label>Severity</label>
+//             <strong>{toPercent(prediction.severity)}</strong>
+//           </div>
+//           <div className="metric-block">
+//             <label>Threshold</label>
+//             <strong>{toPercent(prediction.severity_threshold)}</strong>
+//           </div>
+//         </div>
+//         <div className="gauge-shell">
+//           <div className="gauge-fill" style={{ width: toPercent(prediction.severity) }} />
+//           <span>Severity {toPercent(prediction.severity)}</span>
+//         </div>
+//       </article>
+
+//       {/* 1. Only show breakdown/foods if NOT "OK" */}
+//       {statusLabel !== "OK" ? (
+//         <>
+//         <article className="card">
+//           <h3>Probability Breakdown</h3>
+//           <ul className="compact-list">
+//             {probabilities.map(([label, value]) => (
+//               <li key={label}>
+//                 <span>{label}</span>
+//                 <strong>{toPercent(value)}</strong>
+//               </li>
+//             ))}
+//           </ul>
+//         </article>
+
+//       <article className="card">
+//         <h3>Top Recommended Foods</h3>
+//         {rankedFoods.length === 0 ? (
+//           <p className="muted">Diet recommendation not available.</p>
+//         ) : (
+//           <ul className="compact-list">
+//             {rankedFoods.map((item) => (
+//               <li key={`${item.food_name}-${item.source_dataset}`}>
+//                 <span>{item.food_name}</span>
+//                 <strong>{item.score?.toFixed(3)}</strong>
+//               </li>
+//             ))}
+//           </ul>
+//         )}
+//       </article>
+
+//       <article className="card">
+//         <h3>Meal Plan</h3>
+//         {mealPlan.length === 0 ? (
+//           <p className="muted">Meal plan unavailable.</p>
+//         ) : (
+//           <ul className="compact-list">
+//             {mealPlan.map(([slot, item]) => (
+//               <li key={slot}>
+//                 <span>{slot}</span>
+//                 <strong>{item?.food_name || 'n/a'}</strong>
+//               </li>
+//             ))}
+//           </ul>
+//         )}
+//         {diet.medical_advice ? (
+//           <p className={`advice ${diet.consult_specialist ? 'advice-alert' : 'advice-ok'}`}>{diet.medical_advice}</p>
+//         ) : null}
+//       </article>
+
+//       {/* =============================================================================== */}
+//       {/* Fix - Message shown if status is ok */}
+
+//           {/* Message shown when status is OK */}
+//           <article className="card status-ok-message">
+//             <h3>Results: Healthy</h3>
+//             <p>Your indicators are within normal ranges. No specific dietary changes are recommended at this time. Maintain your current healthy lifestyle!</p>
+//           </article>
+//         )}
+
+//       {/* Fix ends here */}
+//       {/* ==================================================================================== */}
+
+//       <article className="card heatmap-card">
+//         <h3>Grad-CAM Viewer</h3>
+//         {heatmaps.length === 0 ? (
+//           <p className="muted">No heatmaps generated for this run.</p>
+//         ) : (
+//           <div className="heatmap-grid">
+//             {heatmaps.map((hm) => (
+//               <div className="heatmap-pair" key={hm.image_id}>
+//                 <figure>
+//                   <img src={`data:image/jpeg;base64,${hm.base_b64}`} alt="Base frame" />
+//                   <figcaption>Base</figcaption>
+//                 </figure>
+//                 <figure>
+//                   <img src={`data:image/jpeg;base64,${hm.overlay_b64}`} alt="Grad-CAM overlay" />
+//                   <figcaption>Grad-CAM</figcaption>
+//                 </figure>
+//               </div>
+//             ))}
+//           </div>
+//         )}
+//       </article>
+//     </div>
+//   )
+// }
+
 function AnalysisResult({ bundle, title }) {
   if (!bundle) {
     return (
       <article className="card result-empty">
         <h3>{title}</h3>
-        <p>Run an analysis to view prediction, severity alerts, food recommendations, and heatmaps.</p>
+        <p>
+          Run an analysis to view prediction, severity alerts, food
+          recommendations, and heatmaps.
+        </p>
       </article>
     )
   }
 
   const prediction = bundle.prediction || {}
-  // =========================================================================
-  // Fix - handling severity displays (14-03-2026)
 
-  const severity = prediction.severity || 0;
-  const threshold = prediction.severity_threshold || 0.72;
+  const severity = prediction.severity || 0
+  const threshold = prediction.severity_threshold || 0.72
 
-  let statusLabel = "OK";
-  let statusClass = "status-ok"; // Green
+  let statusLabel = "OK"
+  let statusClass = "status-ok"
 
   if (severity >= threshold) {
-    statusLabel = "Severe";
-    statusClass = "status-alert"; // Red
-  } else if (severity >= threshold - 0.15) { 
-    // If severity is within 0.15 of the threshold, mark as Mild
-    statusLabel = "Mild";
-    statusClass = "status-warning"; // Yellow (we will add this class)
+    statusLabel = "Severe"
+    statusClass = "status-alert"
+  } else if (severity >= threshold - 0.15) {
+    statusLabel = "Mild"
+    statusClass = "status-warning"
   }
 
-  // Fix - ended here
-  // ===================================================================================
-  
   const result = bundle.result || {}
   const diet = bundle.diet || {}
-  const probabilities = Object.entries(prediction.probabilities || {}).sort((a, b) => b[1] - a[1])
+
+  const probabilities = Object.entries(prediction.probabilities || {}).sort(
+    (a, b) => b[1] - a[1]
+  )
+
   const rankedFoods = (diet.ranked_foods || []).slice(0, 10)
+
   const mealPlan = Object.entries(diet.meal_plan || {})
+
   const heatmaps = result.heatmaps || []
 
   return (
     <div className="result-stack">
 
-      {/* =========================================================================================== */}
-      {/* Fix - Severity handling */}
-
       {statusLabel === "Severe" && (
         <div className="critical-alert-banner">
           <div className="alert-content">
             <h2>⚠️ CRITICAL SEVERITY DETECTED</h2>
-            <p>Your analysis indicates a high probability of severe vitamin deficiency. Please prioritize professional medical consultation immediately.</p>
+            <p>
+              Your analysis indicates a high probability of severe vitamin
+              deficiency. Please consult a medical professional immediately.
+            </p>
           </div>
         </div>
       )}
 
-      {/* Fix ends here */}
-      {/* =========================================================================================== */}
-      
       <article className="card">
         <div className="card-head">
           <h3>{title}</h3>
-          
-          {/* ================================================================================== */}
-          {/* Fix - handling severity displays (14-03-2026)  */}
           <span className={`status-pill ${statusClass}`}>
             {statusLabel}
-          {/* <span className={`status-pill ${prediction.severity_alert ? 'status-alert' : 'status-ok'}`}>
-            {prediction.severity_alert ? 'Alert triggered' : 'Within threshold'} */}
-            {/* Fix ended here */}
-            {/* ================================================================================ */}
-            
           </span>
         </div>
-        <p className="muted">Updated: {new Date(bundle.createdAt).toLocaleString()}</p>
+
+        <p className="muted">
+          Updated: {new Date(bundle.createdAt).toLocaleString()}
+        </p>
+
         <div className="metrics-grid">
           <div className="metric-block">
             <label>Predicted class</label>
-            <strong>{prediction.predicted_class || 'n/a'}</strong>
+            <strong>{prediction.predicted_class || "n/a"}</strong>
           </div>
+
           <div className="metric-block">
             <label>Confidence</label>
             <strong>{toPercent(prediction.confidence)}</strong>
           </div>
+
           <div className="metric-block">
             <label>Severity</label>
             <strong>{toPercent(prediction.severity)}</strong>
           </div>
+
           <div className="metric-block">
             <label>Threshold</label>
             <strong>{toPercent(prediction.severity_threshold)}</strong>
           </div>
         </div>
+
         <div className="gauge-shell">
-          <div className="gauge-fill" style={{ width: toPercent(prediction.severity) }} />
+          <div
+            className="gauge-fill"
+            style={{ width: toPercent(prediction.severity) }}
+          />
           <span>Severity {toPercent(prediction.severity)}</span>
         </div>
       </article>
 
-      {/* 1. Only show breakdown/foods if NOT "OK" */}
       {statusLabel !== "OK" ? (
         <>
-        <article className="card">
-          <h3>Probability Breakdown</h3>
-          <ul className="compact-list">
-            {probabilities.map(([label, value]) => (
-              <li key={label}>
-                <span>{label}</span>
-                <strong>{toPercent(value)}</strong>
-              </li>
-            ))}
-          </ul>
-        </article>
-
-      <article className="card">
-        <h3>Top Recommended Foods</h3>
-        {rankedFoods.length === 0 ? (
-          <p className="muted">Diet recommendation not available.</p>
-        ) : (
-          <ul className="compact-list">
-            {rankedFoods.map((item) => (
-              <li key={`${item.food_name}-${item.source_dataset}`}>
-                <span>{item.food_name}</span>
-                <strong>{item.score?.toFixed(3)}</strong>
-              </li>
-            ))}
-          </ul>
-        )}
-      </article>
-
-      <article className="card">
-        <h3>Meal Plan</h3>
-        {mealPlan.length === 0 ? (
-          <p className="muted">Meal plan unavailable.</p>
-        ) : (
-          <ul className="compact-list">
-            {mealPlan.map(([slot, item]) => (
-              <li key={slot}>
-                <span>{slot}</span>
-                <strong>{item?.food_name || 'n/a'}</strong>
-              </li>
-            ))}
-          </ul>
-        )}
-        {diet.medical_advice ? (
-          <p className={`advice ${diet.consult_specialist ? 'advice-alert' : 'advice-ok'}`}>{diet.medical_advice}</p>
-        ) : null}
-      </article>
-
-      {/* =============================================================================== */}
-      {/* Fix - Message shown if status is ok */}
-
-          {/* Message shown when status is OK */}
-          <article className="card status-ok-message">
-            <h3>Results: Healthy</h3>
-            <p>Your indicators are within normal ranges. No specific dietary changes are recommended at this time. Maintain your current healthy lifestyle!</p>
+          <article className="card">
+            <h3>Probability Breakdown</h3>
+            <ul className="compact-list">
+              {probabilities.map(([label, value]) => (
+                <li key={label}>
+                  <span>{label}</span>
+                  <strong>{toPercent(value)}</strong>
+                </li>
+              ))}
+            </ul>
           </article>
-        )}
 
-      {/* Fix ends here */}
-      {/* ==================================================================================== */}
+          <article className="card">
+            <h3>Top Recommended Foods</h3>
+
+            {rankedFoods.length === 0 ? (
+              <p className="muted">Diet recommendation not available.</p>
+            ) : (
+              <ul className="compact-list">
+                {rankedFoods.map((item) => (
+                  <li key={`${item.food_name}-${item.source_dataset}`}>
+                    <span>{item.food_name}</span>
+                    <strong>{item.score?.toFixed(3)}</strong>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </article>
+
+          <article className="card">
+            <h3>Meal Plan</h3>
+
+            {mealPlan.length === 0 ? (
+              <p className="muted">Meal plan unavailable.</p>
+            ) : (
+              <ul className="compact-list">
+                {mealPlan.map(([slot, item]) => (
+                  <li key={slot}>
+                    <span>{slot}</span>
+                    <strong>{item?.food_name || "n/a"}</strong>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {diet.medical_advice && (
+              <p
+                className={`advice ${
+                  diet.consult_specialist ? "advice-alert" : "advice-ok"
+                }`}
+              >
+                {diet.medical_advice}
+              </p>
+            )}
+          </article>
+        </>
+      ) : (
+        <article className="card status-ok-message">
+          <h3>Results: Healthy</h3>
+          <p>
+            Your indicators are within normal ranges. No specific dietary
+            changes are recommended at this time. Maintain your current
+            healthy lifestyle.
+          </p>
+        </article>
+      )}
 
       <article className="card heatmap-card">
         <h3>Grad-CAM Viewer</h3>
+
         {heatmaps.length === 0 ? (
           <p className="muted">No heatmaps generated for this run.</p>
         ) : (
@@ -195,11 +390,18 @@ function AnalysisResult({ bundle, title }) {
             {heatmaps.map((hm) => (
               <div className="heatmap-pair" key={hm.image_id}>
                 <figure>
-                  <img src={`data:image/jpeg;base64,${hm.base_b64}`} alt="Base frame" />
+                  <img
+                    src={`data:image/jpeg;base64,${hm.base_b64}`}
+                    alt="Base frame"
+                  />
                   <figcaption>Base</figcaption>
                 </figure>
+
                 <figure>
-                  <img src={`data:image/jpeg;base64,${hm.overlay_b64}`} alt="Grad-CAM overlay" />
+                  <img
+                    src={`data:image/jpeg;base64,${hm.overlay_b64}`}
+                    alt="Grad-CAM overlay"
+                  />
                   <figcaption>Grad-CAM</figcaption>
                 </figure>
               </div>
@@ -207,6 +409,7 @@ function AnalysisResult({ bundle, title }) {
           </div>
         )}
       </article>
+
     </div>
   )
 }
