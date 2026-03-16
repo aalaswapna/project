@@ -176,7 +176,7 @@ function AnalysisResult({ bundle, title }) {
       {/* =============================================================================== */}
       {/* Fix - Message shown if status is ok */}
 
-          /* Message shown when status is OK */
+          {/* Message shown when status is OK */}
           <article className="card status-ok-message">
             <h3>Results: Healthy</h3>
             <p>Your indicators are within normal ranges. No specific dietary changes are recommended at this time. Maintain your current healthy lifestyle!</p>
